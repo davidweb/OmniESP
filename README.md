@@ -189,5 +189,6 @@ Les contributions sont les bienvenues ! Pour ajouter un nouveau driver :
 3.  Ajoutez l'option dans le `<select>` du fichier `index.html`.
 4.  Compilez !
 
-**Auteur :** NeoRak 
+**Auteur :** NeoRak
+
 **Licence :** MIT
