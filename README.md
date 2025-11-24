@@ -2,6 +2,8 @@
 
 ![Version](https://img.shields.io/badge/version-2.0.0-blue.svg) ![Platform](https://img.shields.io/badge/platform-ESP32-green.svg) ![License](https://img.shields.io/badge/license-MIT-orange.svg)
 ![PlatformIO](https://img.shields.io/badge/PlatformIO-Core-orange) ![Framework](https://img.shields.io/badge/Framework-Arduino%20%7C%20FreeRTOS-blue).
+
+
 **OmniESP OS** est un firmware universel "No-Code" pour ESP32. Il transforme votre microcontrôleur en une centrale domotique autonome, configurable via une interface web moderne, sans jamais avoir besoin de recompiler le code.
 
 La **Version 2.0** introduit une architecture de grade industriel, une gestion native du bus I2C avec scanner intégré, et le support de capteurs de précision.
