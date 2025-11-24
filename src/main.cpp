@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
+#include <WebServer.h>
 #include <ESPAsyncWebServer.h>
 #include <LittleFS.h>
 #include <ArduinoJson.h>
@@ -150,10 +151,20 @@ void setup() {
 
     loadConfig();
 
-    WiFiManager wm;
-    wm.setClass("invert"); // Dark mode theme :)
-    if(!wm.autoConnect("OmniESP-V2", "admin1234")) ESP.restart(); 
-    Serial.println(WiFi.localIP());
+        WiFiManager wm;
+        wm.setClass("invert"); // Dark mode theme :)
+        if(!wm.autoConnect("OmniESP-V2", "admin1234")) ESP.restart(); 
+        // Ensure WiFiManager's config portal (and its internal webserver) is stopped
+        // before starting our AsyncWebServer. Some WiFiManager forks keep sockets
+        // open briefly which causes AsyncTCP bind errors (ERR_USE = -8).
+        #if defined(WIFI_MANAGER_STOP_CONFIG_PORTAL)
+            wm.stopConfigPortal();
+        #elif defined(WiFiManager_h)
+            // Many forks expose stopConfigPortal(); call it if available at runtime.
+            wm.stopConfigPortal();
+        #endif
+        delay(200); // brief pause to allow socket cleanup
+        Serial.println(WiFi.localIP());
 
     // --- API STATUS ---
     server.on("/api/status", HTTP_GET, [](AsyncWebServerRequest *req){
